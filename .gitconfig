@@ -1,0 +1,14 @@
+[alias]
+	co = checkout
+	ss = status
+	cm = commit -m
+	cb = checkout -b
+	lo = log --oneline
+[user]
+	name = Jois Andresky
+	email = andreskyjois8@gmail.com
+
+[url "git@gitlab.com:"]
+        insteadOf = https://gitlab.com
+[url "git@github.com:"]
+	insteadOf = https://github.com/
