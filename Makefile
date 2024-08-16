@@ -12,8 +12,12 @@ update-nvim:
 update-alacritty:
 	cp -r ~/.config/alacritty ./.config/.
 
+update-kitty:
+	cp -r ~/.config/kitty ./.config/.
+	
 update-all:
 	make update-tmux
 	make update-wezterm
 	make update-nvim
 	make update-alacritty
+	make update-kitty

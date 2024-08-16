@@ -14,4 +14,7 @@ return {
   },
   event = { "VeryLazy" },
   config = true,
+  opts = {
+    lsp_server = "phpactor",
+  },
 }

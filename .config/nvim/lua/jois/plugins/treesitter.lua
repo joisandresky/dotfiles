@@ -47,6 +47,7 @@ return {
         "vue",
         "php",
         "phpdoc",
+        "proto",
       },
       incremental_selection = {
         enable = true,
