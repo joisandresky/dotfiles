@@ -23,6 +23,14 @@ keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" })
 keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" })
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" })
 
+-- move lines
+keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+-- keymap.set("n", "J", ":m .+1<CR>==")
+-- keymap.set("n", "K", ":m .-2<CR>==")
+-- keymap.set("i", "J", ":m .+1<CR>==gi")
+-- keymap.set("i", "K", ":m .-2<CR>==gi")
+
 if vim.lsp.inlay_hint then
   keymap.set("n", "<leader>uh", function()
     vim.lsp.inlay_hint.enable()

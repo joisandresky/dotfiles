@@ -39,7 +39,7 @@ return {
         "pyright",
         "gopls",
         "volar",
-        "vuels",
+        -- "vuels",
         "phpactor",
       },
     })
