@@ -11,8 +11,8 @@ padding.y = 10
 
 decorations = "Buttonless"
 startup_mode = "Maximized"
-opacity = 0.8
-blur = true
+# opacity = 0.8
+# blur = true
 
 option_as_alt = "both"
 
