@@ -45,8 +45,8 @@ return {
         "rust",
         "go",
         "vue",
-        "php",
-        "phpdoc",
+        -- "php",
+        -- "phpdoc",
         "proto",
       },
       incremental_selection = {

@@ -16,23 +16,37 @@
 
 -- catpuccin
 --
+-- return {
+--   "catppuccin/nvim",
+--   name = "catppuccin",
+--   priority = 1000,
+--   config = function()
+--     require("catppuccin").setup({
+--       flavour = "mocha", -- latte, frappe, macchiato, mocha
+--       transparent_background = true,
+--       show_end_of_buffer = false,
+--       term_colors = true,
+--       dim_inactive = {
+--         enabled = false,
+--         shade = "dark",
+--         percentage = 0.15,
+--       },
+--     })
+--     vim.cmd.colorscheme("catppuccin")
+--   end,
+-- }
+--
+
+-- pine-rose
+--
 return {
-  "catppuccin/nvim",
-  name = "catppuccin",
+  "sainnhe/gruvbox-material",
+  lazy = false,
   priority = 1000,
   config = function()
-    require("catppuccin").setup({
-      flavour = "mocha", -- latte, frappe, macchiato, mocha
-      transparent_background = true,
-      show_end_of_buffer = false,
-      term_colors = true,
-      dim_inactive = {
-        enabled = false,
-        shade = "dark",
-        percentage = 0.15,
-      },
-    })
-    vim.cmd.colorscheme("catppuccin")
+    -- Optionally configure and load the colorscheme
+    -- directly inside the plugin declaration.
+    vim.g.gruvbox_material_enable_italic = true
+    vim.cmd.colorscheme("gruvbox-material")
   end,
 }
---

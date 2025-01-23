@@ -8,7 +8,7 @@ return {
     lualine.setup({
       options = {
         -- theme = my_lualine_theme,
-        theme = "catppuccin",
+        theme = "gruvbox-material",
       },
       sections = {
         lualine_x = {

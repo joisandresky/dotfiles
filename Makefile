@@ -14,6 +14,9 @@ update-alacritty:
 
 update-kitty:
 	cp -r ~/.config/kitty ./.config/.
+
+update-ghostty:
+	cp -r ~/.config/ghostty ./.config/.
 	
 update-all:
 	make update-tmux
@@ -21,3 +24,4 @@ update-all:
 	make update-nvim
 	make update-alacritty
 	make update-kitty
+	make update-ghostty
