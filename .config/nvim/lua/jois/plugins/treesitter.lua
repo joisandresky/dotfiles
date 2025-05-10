@@ -48,6 +48,7 @@ return {
         -- "php",
         -- "phpdoc",
         "proto",
+        "zig",
       },
       incremental_selection = {
         enable = true,

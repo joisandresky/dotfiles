@@ -42,6 +42,8 @@ return {
         "volar",
         -- "vuels",
         "phpactor",
+        "zls",
+        "emmet_language_server",
       },
     })
 

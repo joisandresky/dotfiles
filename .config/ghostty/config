@@ -3,18 +3,22 @@ theme = GruvboxDark
 # background-opacity = 0.85
 # background-blur-radius = 20
 
-font-family = JetBrains Mono Nerd Font
-font-size = 15
+# font-family = JetBrains Mono Nerd Font
+font-family = DankMono Nerd Font
+font-thicken = true
+font-size = 16
 cursor-style = block
 cursor-style-blink = false
 
-macos-titlebar-style = hidden
+title = " "
+macos-titlebar-style = tabs
 
 confirm-close-surface = true
 window-decoration = true
 window-padding-x = 10
 window-padding-y = 10
 window-padding-balance = true
+window-save-state = always
 
 auto-update = check
 

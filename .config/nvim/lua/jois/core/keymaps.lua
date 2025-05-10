@@ -36,3 +36,4 @@ if vim.lsp.inlay_hint then
     vim.lsp.inlay_hint.enable()
   end, { desc = "Toggle inlay hints" })
 end
+-- vim.lsp.inlay_hint.enable()
