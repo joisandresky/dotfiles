@@ -89,12 +89,12 @@ return {
           [vim.diagnostic.severity.INFO] = "󰋼 ",
           [vim.diagnostic.severity.HINT] = "󰌵 ",
         },
-        linehl = {
-          [vim.diagnostic.severity.ERROR] = "DiagnosticSign" .. "Error",
-          [vim.diagnostic.severity.WARN] = "DiagnosticSign" .. "Warn",
-          [vim.diagnostic.severity.HINT] = "DiagnosticSign" .. "Hint",
-          [vim.diagnostic.severity.INFO] = "DiagnosticSign" .. "Info",
-        },
+        -- linehl = {
+        --   [vim.diagnostic.severity.ERROR] = "DiagnosticSign" .. "Error",
+        --   [vim.diagnostic.severity.WARN] = "DiagnosticSign" .. "Warn",
+        --   [vim.diagnostic.severity.HINT] = "DiagnosticSign" .. "Hint",
+        --   [vim.diagnostic.severity.INFO] = "DiagnosticSign" .. "Info",
+        -- },
         numhl = {
           [vim.diagnostic.severity.ERROR] = "",
           [vim.diagnostic.severity.WARN] = "",
