@@ -73,87 +73,162 @@ return {
 
     -- Change the Diagnostic symbols in the sign column (gutter)
     -- (not in youtube nvim video)
-    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
+    -- local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+    -- for type, icon in pairs(signs) do
+    --   local hl = "DiagnosticSign" .. type
+    --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+    -- end
 
-    mason_lspconfig.setup_handlers({
-      -- default handler for installed servers
-      function(server_name)
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-        })
-      end,
-      ["svelte"] = function()
-        -- configure svelte server
-        lspconfig["svelte"].setup({
-          capabilities = capabilities,
-          on_attach = function(client, bufnr)
-            vim.api.nvim_create_autocmd("BufWritePost", {
-              pattern = { "*.js", "*.ts" },
-              callback = function(ctx)
-                -- Here use ctx.match instead of ctx.file
-                client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-              end,
-            })
+    vim.diagnostic.config({
+      -- virtual_lines = true,
+      virtual_text = true,
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = " ",
+          [vim.diagnostic.severity.WARN] = " ",
+          [vim.diagnostic.severity.INFO] = "󰋼 ",
+          [vim.diagnostic.severity.HINT] = "󰌵 ",
+        },
+        linehl = {
+          [vim.diagnostic.severity.ERROR] = "DiagnosticSign" .. "Error",
+          [vim.diagnostic.severity.WARN] = "DiagnosticSign" .. "Warn",
+          [vim.diagnostic.severity.HINT] = "DiagnosticSign" .. "Hint",
+          [vim.diagnostic.severity.INFO] = "DiagnosticSign" .. "Info",
+        },
+        numhl = {
+          [vim.diagnostic.severity.ERROR] = "",
+          [vim.diagnostic.severity.WARN] = "",
+          [vim.diagnostic.severity.HINT] = "",
+          [vim.diagnostic.severity.INFO] = "",
+        },
+      },
+    })
+
+    lspconfig["gopls"].setup({
+      capabilities = capabilities,
+      cmd = { "gopls" },
+      filetypes = { "go", "gomod", "gowork", "gotmpl" },
+      root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+      settings = {
+        gopls = {
+          completeUnimported = true,
+          usePlaceholders = true,
+          analyses = {
+            unusedparams = true,
+          },
+        },
+      },
+    })
+
+    lspconfig["svelte"].setup({
+      capabilities = capabilities,
+      on_attach = function(client, bufnr)
+        vim.api.nvim_create_autocmd("BufWritePost", {
+          pattern = { "*.js", "*.ts" },
+          callback = function(ctx)
+            -- Here use ctx.match instead of ctx.file
+            client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
           end,
         })
       end,
-      ["graphql"] = function()
-        -- configure graphql language server
-        lspconfig["graphql"].setup({
-          capabilities = capabilities,
-          filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-        })
-      end,
-      ["emmet_ls"] = function()
-        -- configure emmet language server
-        lspconfig["emmet_ls"].setup({
-          capabilities = capabilities,
-          filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
-        })
-      end,
-      ["lua_ls"] = function()
-        -- configure lua server (with special settings)
-        lspconfig["lua_ls"].setup({
-          capabilities = capabilities,
-          settings = {
-            Lua = {
-              -- make the language server recognize "vim" global
-              diagnostics = {
-                globals = { "vim" },
-              },
-              completion = {
-                callSnippet = "Replace",
-              },
-            },
-          },
-        })
-      end,
-      ["gopls"] = function()
-        lspconfig["gopls"].setup({
-          capabilities = capabilities,
-          cmd = { "gopls" },
-          filetypes = { "go", "gomod", "gowork", "gotmpl" },
-          root_dir = util.root_pattern("go.work", "go.mod", ".git"),
-          settings = {
-            gopls = {
-              completeUnimported = true,
-              usePlaceholders = true,
-              analyses = {
-                unusedparams = true,
-              },
-            },
-          },
-        })
-      end,
-      ["volar"] = function()
-        lspconfig["volar"].setup({
-          filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
-        })
-      end,
     })
+
+    lspconfig["emmet_ls"].setup({
+      capabilities = capabilities,
+      filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+    })
+
+    -- configure lua server (with special settings)
+    lspconfig["lua_ls"].setup({
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          -- make the language server recognize "vim" global
+          diagnostics = {
+            globals = { "vim" },
+          },
+          completion = {
+            callSnippet = "Replace",
+          },
+        },
+      },
+    })
+
+    -- mason_lspconfig.setup_handlers({
+    --   -- default handler for installed servers
+    --   function(server_name)
+    --     lspconfig[server_name].setup({
+    --       capabilities = capabilities,
+    --     })
+    --   end,
+    --   ["svelte"] = function()
+    --     -- configure svelte server
+    --     lspconfig["svelte"].setup({
+    --       capabilities = capabilities,
+    --       on_attach = function(client, bufnr)
+    --         vim.api.nvim_create_autocmd("BufWritePost", {
+    --           pattern = { "*.js", "*.ts" },
+    --           callback = function(ctx)
+    --             -- Here use ctx.match instead of ctx.file
+    --             client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
+    --           end,
+    --         })
+    --       end,
+    --     })
+    --   end,
+    --   ["graphql"] = function()
+    --     -- configure graphql language server
+    --     lspconfig["graphql"].setup({
+    --       capabilities = capabilities,
+    --       filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
+    --     })
+    --   end,
+    --   ["emmet_ls"] = function()
+    --     -- configure emmet language server
+    --     lspconfig["emmet_ls"].setup({
+    --       capabilities = capabilities,
+    --       filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+    --     })
+    --   end,
+    --   ["lua_ls"] = function()
+    --     -- configure lua server (with special settings)
+    --     lspconfig["lua_ls"].setup({
+    --       capabilities = capabilities,
+    --       settings = {
+    --         Lua = {
+    --           -- make the language server recognize "vim" global
+    --           diagnostics = {
+    --             globals = { "vim" },
+    --           },
+    --           completion = {
+    --             callSnippet = "Replace",
+    --           },
+    --         },
+    --       },
+    --     })
+    --   end,
+    --   ["gopls"] = function()
+    --     lspconfig["gopls"].setup({
+    --       capabilities = capabilities,
+    --       cmd = { "gopls" },
+    --       filetypes = { "go", "gomod", "gowork", "gotmpl" },
+    --       root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+    --       settings = {
+    --         gopls = {
+    --           completeUnimported = true,
+    --           usePlaceholders = true,
+    --           analyses = {
+    --             unusedparams = true,
+    --           },
+    --         },
+    --       },
+    --     })
+    --   end,
+    --   ["volar"] = function()
+    --     lspconfig["volar"].setup({
+    --       filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+    --     })
+    --   end,
+    -- })
   end,
 }
