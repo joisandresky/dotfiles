@@ -1,0 +1,3 @@
+WRN 2026-06-05T13:13:40.325 ?.62156    server_start:197: Failed to start server: operation not permitted: /var/folders/dv/7r_ghkp569z99v74xc8shv300000gn/T/nvim.joisandresky/sAfehb/nvim.62156.0
+WRN 2026-06-05T13:13:40.325 ?.62155    server_start:197: Failed to start server: operation not permitted: /var/folders/dv/7r_ghkp569z99v74xc8shv300000gn/T/nvim.joisandresky/DxpLNw/nvim.62155.0
+WRN 2026-06-11T09:52:04.208 ?.57121    server_start:197: Failed to start server: operation not permitted: /var/folders/dv/7r_ghkp569z99v74xc8shv300000gn/T/nvim.joisandresky/6AZPPp/nvim.57121.0

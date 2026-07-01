@@ -7,13 +7,6 @@ return {
     { "folke/neodev.nvim", opts = {} },
   },
   config = function()
-    -- import lspconfig plugin
-    local lspconfig = require("lspconfig")
-    local util = require("lspconfig/util")
-
-    -- import mason_lspconfig plugin
-    local mason_lspconfig = require("mason-lspconfig")
-
     -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
@@ -28,19 +21,19 @@ return {
 
         -- set keybinds
         opts.desc = "Show LSP references"
-        keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
+        keymap.set("n", "gR", vim.lsp.buf.references, opts) -- show definition, references
 
         opts.desc = "Go to declaration"
         keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
 
         opts.desc = "Show LSP definitions"
-        keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
+        keymap.set("n", "gd", vim.lsp.buf.definition, opts) -- show lsp definitions
 
         opts.desc = "Show LSP implementations"
-        keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
+        keymap.set("n", "gi", vim.lsp.buf.implementation, opts) -- show lsp implementations
 
         opts.desc = "Show LSP type definitions"
-        keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
+        keymap.set("n", "gt", vim.lsp.buf.type_definition, opts) -- show lsp type definitions
 
         opts.desc = "See available code actions"
         keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
@@ -61,7 +54,8 @@ return {
         keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
 
         opts.desc = "Show documentation for what is under cursor"
-        keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
+        -- keymap.set("n", "K", hover_without_treesitter, opts) -- show documentation for what is under cursor
+        keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
         opts.desc = "Restart LSP"
         keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
@@ -104,11 +98,8 @@ return {
       },
     })
 
-    lspconfig["gopls"].setup({
+    vim.lsp.config("gopls", {
       capabilities = capabilities,
-      cmd = { "gopls" },
-      filetypes = { "go", "gomod", "gowork", "gotmpl" },
-      root_dir = util.root_pattern("go.work", "go.mod", ".git"),
       settings = {
         gopls = {
           completeUnimported = true,
@@ -119,10 +110,11 @@ return {
         },
       },
     })
+    vim.lsp.enable("gopls")
 
-    lspconfig["svelte"].setup({
+    vim.lsp.config("svelte", {
       capabilities = capabilities,
-      on_attach = function(client, bufnr)
+      on_attach = function(client, _)
         vim.api.nvim_create_autocmd("BufWritePost", {
           pattern = { "*.js", "*.ts" },
           callback = function(ctx)
@@ -132,14 +124,16 @@ return {
         })
       end,
     })
+    vim.lsp.enable("svelte")
 
-    lspconfig["emmet_ls"].setup({
+    vim.lsp.config("emmet_ls", {
       capabilities = capabilities,
       filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
     })
+    vim.lsp.enable("emmet_ls")
 
     -- configure lua server (with special settings)
-    lspconfig["lua_ls"].setup({
+    vim.lsp.config("lua_ls", {
       capabilities = capabilities,
       settings = {
         Lua = {
@@ -153,6 +147,7 @@ return {
         },
       },
     })
+    vim.lsp.enable("lua_ls")
 
     -- mason_lspconfig.setup_handlers({
     --   -- default handler for installed servers

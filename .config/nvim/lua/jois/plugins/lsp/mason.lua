@@ -40,7 +40,7 @@ return {
         "prismals",
         "pyright",
         "gopls",
-        "volar",
+        -- "volar",
         -- "vuels",
         "phpactor",
         "zls",
@@ -56,7 +56,7 @@ return {
         "black", -- python formatter
         "pylint",
         "eslint_d",
-        "rustfmt",
+        -- "rustfmt",
         "gofumpt",
         "goimports-reviser",
         "golines",
