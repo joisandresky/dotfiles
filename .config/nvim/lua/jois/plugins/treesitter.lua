@@ -9,6 +9,7 @@ return {
     local ensureInstalled = {
       "rust",
       "javascript",
+      "angular",
       "zig",
       "json",
       "typescript",

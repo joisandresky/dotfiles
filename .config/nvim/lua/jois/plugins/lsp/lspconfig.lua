@@ -126,6 +126,18 @@ return {
     })
     vim.lsp.enable("svelte")
 
+    vim.lsp.config("angularls", {
+      capabilities = capabilities,
+      init_options = {
+        angularCompletions = true,
+        autocompleteSuggestionList = true,
+        diagnostics = {
+          suggestionList = true,
+        },
+      },
+    })
+    vim.lsp.enable("angularls")
+
     vim.lsp.config("emmet_ls", {
       capabilities = capabilities,
       filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },

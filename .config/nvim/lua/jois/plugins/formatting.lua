@@ -23,11 +23,13 @@ return {
         rust = { "rustfmt" },
         go = { "gofumpt", "goimports-reviser", "golines" },
       },
-      format_on_save = {
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 1000,
-      },
+      -- format_on_save disabled: run :w then <leader>mp on code you wrote,
+      -- so untouched lines don't get reformatted into noisy diffs
+      -- format_on_save = {
+      --   lsp_fallback = true,
+      --   async = false,
+      --   timeout_ms = 1000,
+      -- },
     })
 
     vim.keymap.set({ "n", "v" }, "<leader>mp", function()

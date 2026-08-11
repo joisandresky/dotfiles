@@ -45,6 +45,7 @@ return {
         "phpactor",
         "zls",
         "emmet_language_server",
+        "angularls",
       },
     })
 
